@@ -12,10 +12,13 @@ public class Solver {
 		System.out.println();
 		
 		DancingItem[][] init = new DancingItem[][] {
-			{new DancingColumn("A"),new DancingColumn("B"),new DancingColumn("C")},
-			{null,null,new DancingObject(1)},
-			{new DancingObject(2),new DancingObject(4),null},
-			{new DancingObject(3),null,new DancingObject(5)}
+			{new DancingColumn("A"),new DancingColumn("B"),new DancingColumn("C"),new DancingColumn("D"),new DancingColumn("E"),new DancingColumn("F"),new DancingColumn("G")},
+			{null,null,new DancingObject(1),null,new DancingObject(1),new DancingObject(1),null},
+			{new DancingObject(1),null,null,new DancingObject(1),null,null,new DancingObject(1)},
+			{null,new DancingObject(1),new DancingObject(1),null,null,new DancingObject(1),null},
+			{new DancingObject(1),null,null,new DancingObject(1),null,null,null},
+			{null,new DancingObject(1),null,null,null,null,new DancingObject(1)},
+			{null,null,null,new DancingObject(1),new DancingObject(1),null,new DancingObject(1)}
 		};
 		
 		Matrix.computeLinks(init);

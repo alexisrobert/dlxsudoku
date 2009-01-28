@@ -35,7 +35,6 @@ public class DLX {
 			
 			// covering columns at the right
 			lrit = downit.right();
-			System.out.println(downit.up().down());
 			while (lrit != downit) {
 				if (lrit instanceof DancingObject)
 					((DancingObject)lrit).getColumn().cover();
@@ -43,9 +42,6 @@ public class DLX {
 			}
 			
 			solve(k+1);
-			
-			downit = rows.get(k);
-			c = ((DancingObject)downit).getColumn();
 			
 			// uncovering columns from the left
 			lrit = downit.left();

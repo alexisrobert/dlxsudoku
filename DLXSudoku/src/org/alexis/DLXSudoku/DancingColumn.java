@@ -49,8 +49,6 @@ public class DancingColumn extends DancingItem {
 		DancingItem it2 = null;
 		while (it != this) {
 			try {
-				if (it.right() == null) continue;
-				
 				it2 = it.right();
 				while (it2 != it) {
 					System.out.println("Covering object "+it2.toString());

@@ -14,8 +14,8 @@ public class Solver {
 		DancingItem[][] init = new DancingItem[][] {
 			{new DancingColumn("A"),new DancingColumn("B"),new DancingColumn("C")},
 			{null,null,new DancingObject(1)},
-			{new DancingObject(1),null,null},
-			{new DancingObject(1),null,new DancingObject(1)}
+			{new DancingObject(2),new DancingObject(4),null},
+			{new DancingObject(3),null,new DancingObject(5)}
 		};
 		
 		Matrix.computeLinks(init);
@@ -31,30 +31,9 @@ public class Solver {
 		
 		System.gc();
 		
-		System.out.println("Step 3. Covering column A ...");
-		((DancingColumn) init[0][0]).cover();
-		System.out.println();
+		System.out.println("Step 3. Solving matrix ...");
 		
-		System.out.println("Step 4. Going left from column B and down 1x2 ...");
-		System.out.println((DancingColumn) init[0][2]);
-		System.out.println(((DancingColumn) init[0][1]).left());
-		System.out.println(((DancingItem) init[1][2]));
-		System.out.println(((DancingItem) init[1][2]).down().down());
-		
-		System.out.println();
-		System.out.println("Step 5. Rollback covering ...");
-		((DancingColumn) init[0][0]).rollback();
-		
-		System.out.println();
-		
-		System.out.println("Step 6. Going left from column B and down 1x2 ...");
-		System.out.println((DancingColumn) init[0][2]);
-		System.out.println(((DancingColumn) init[0][1]).left());
-		System.out.println(((DancingItem) init[1][2]));
-		System.out.println(((DancingItem) init[1][2]).down());
-		
-		System.out.println();
-		System.out.println("Step 7. Get best column (heuristic) ...");
-		System.out.println(Matrix.getColumnHeuristic(hdr));
+		DLX dlx = new DLX(hdr);
+		dlx.solve(0);
 	}
 }

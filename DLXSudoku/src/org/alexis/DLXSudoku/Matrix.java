@@ -18,12 +18,15 @@ public class Matrix {
 					int k = j-1;
 					while (matrix[i][k] == null && k > 0) { k--; }
 					
-					// and link with it.
-					if (matrix[i][k] != null) {
-						System.out.println(String.format("Linking %dx%d <-> %dx%d (next/prev) ...", i,k,i,j));
-						matrix[i][k].setRight(matrix[i][j]);
-						matrix[i][j].setLeft(matrix[i][k]);
+					// if we've no other nodes to link, link with himself
+					if (matrix[i][k] == null) {
+						k = j;
 					}
+					
+					// and link with it.
+					System.out.println(String.format("Linking %dx%d <-> %dx%d (next/prev) ...", i,k,i,j));
+					matrix[i][k].setRight(matrix[i][j]);
+					matrix[i][j].setLeft(matrix[i][k]);
 				}
 				
 				// Else, find the last node for circular linking if you're on the first column
@@ -43,12 +46,14 @@ public class Matrix {
 					int k = i-1;
 
 					while (matrix[k][j] == null && k > 0) { k--; }
-
-					if (matrix[k][j] != null) {
-						System.out.println(String.format("Linking %dx%d <-> %dx%d (up/down) ...", k,j,i,j));
-						matrix[k][j].setDown(matrix[i][j]);
-						matrix[i][j].setUp(matrix[k][j]);
+					
+					if (matrix[k][j] == null) {
+						k = j;
 					}
+
+					System.out.println(String.format("Linking %dx%d <-> %dx%d (up/down) ...", k,j,i,j));
+					matrix[k][j].setDown(matrix[i][j]);
+					matrix[i][j].setUp(matrix[k][j]);
 				}
 				
 				// Do the same circular linking on rows

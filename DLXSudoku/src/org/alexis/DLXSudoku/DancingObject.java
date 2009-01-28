@@ -22,8 +22,8 @@ public class DancingObject extends DancingItem {
 	}
 	
 	public void cover() {
-		this.up.down = this.down;
 		this.down.up = this.up;
+		this.up.down = this.down;
 		
 		this.column.setSize(this.column.getSize()-1);
 	}
@@ -43,5 +43,9 @@ public class DancingObject extends DancingItem {
 	
 	public DancingColumn getColumn() {
 		return this.column;
+	}
+	
+	public String toString() {
+		return this.data.toString();
 	}
 }

@@ -40,8 +40,8 @@ public class DancingColumn extends DancingItem {
 	
 	public void cover() {
 		// Covering column element
-		this.left.right = this.right;
 		this.right.left = this.left;
+		this.left.right = this.right;
 		
 		System.out.println("Covering "+this.toString());
 		

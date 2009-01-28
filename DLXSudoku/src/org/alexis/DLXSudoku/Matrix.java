@@ -91,4 +91,23 @@ public class Matrix {
 			}
 		}
 	}
+	
+	/** Find the column which has minimal 1's */
+	public static DancingColumn getColumnHeuristic(DancingItem[][] init) {
+		DancingColumn first = (DancingColumn)init[0][0];
+		DancingColumn it = (DancingColumn)init[0][0].right();
+		
+		int min = first.getSize();
+		DancingColumn minobj = first;
+		
+		while (it != first) {
+			if (it.getSize() < min) {
+				minobj = it;
+				min = minobj.getSize();
+			}
+			it = (DancingColumn)it.right();
+		}
+		
+		return minobj;
+	}
 }

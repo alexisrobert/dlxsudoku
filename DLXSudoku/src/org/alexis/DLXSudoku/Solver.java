@@ -48,5 +48,9 @@ public class Solver {
 		System.out.println(((DancingColumn) init[0][1]).left());
 		System.out.println(((DancingItem) init[1][2]));
 		System.out.println(((DancingItem) init[1][2]).down());
+		
+		System.out.println();
+		System.out.println("Step 7. Get best column (heuristic) ...");
+		System.out.println(Matrix.getColumnHeuristic(init));
 	}
 }

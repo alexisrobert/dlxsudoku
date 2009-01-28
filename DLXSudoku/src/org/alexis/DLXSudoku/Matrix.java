@@ -93,21 +93,31 @@ public class Matrix {
 	}
 	
 	/** Find the column which has minimal 1's */
-	public static DancingColumn getColumnHeuristic(DancingItem[][] init) {
-		DancingColumn first = (DancingColumn)init[0][0];
-		DancingColumn it = (DancingColumn)init[0][0].right();
+	public static DancingColumn getColumnHeuristic(DancingHeader hdr) {
+		DancingItem it = hdr.right();
 		
-		int min = first.getSize();
-		DancingColumn minobj = first;
+		int min = ((DancingColumn)it).getSize();
+		DancingColumn minobj = (DancingColumn)it;
 		
-		while (it != first) {
-			if (it.getSize() < min) {
-				minobj = it;
+		while (it != hdr) {
+			if (it instanceof DancingColumn && ((DancingColumn)it).getSize() < min) {
+				minobj = (DancingColumn)it;
 				min = minobj.getSize();
 			}
-			it = (DancingColumn)it.right();
+			it = it.right();
 		}
 		
 		return minobj;
+	}
+	
+	/** Links with DancingHeader */
+	public static void linkHeader(DancingItem[][] init, DancingHeader hdr) {
+		DancingItem first = init[0][0];
+		
+		hdr.setRight(first);
+		hdr.setLeft(first.left());
+		
+		first.left().setRight(hdr);
+		first.setLeft(hdr);
 	}
 }

@@ -47,7 +47,6 @@ public class DancingColumn extends DancingItem {
 		
 		for (DancingItem row = this.down(); row != this; row = row.down()) {
 			for (DancingItem right = row.right(); right != row; right = right.right()) {
-				System.out.println("Covering object "+right);
 				((DancingObject) right).cover();
 			}
 		}
@@ -58,7 +57,6 @@ public class DancingColumn extends DancingItem {
 		
 		for (DancingItem row = this.up(); row != this; row = row.up()) {
 			for (DancingItem left = row.left(); left != row; left = left.left()) {
-				System.out.println("Uncovering object "+left);
 				((DancingObject) left).rollback();
 			}
 		}

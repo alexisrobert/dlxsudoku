@@ -27,7 +27,9 @@ public class DLX {
 		System.out.println(String.format("=== Selecting %s (k=%d) ===",c,k));
 		c.cover();
 		
-		for(DancingItem downit = c.down(); downit != c; downit = downit.down()) {
+		if (c.down() == c) System.out.println("==> FALSE SOLUTION -> rolling back ...");
+		
+		for (DancingItem downit = c.down(); downit != c; downit = downit.down()) {
 			rows.add(downit);
 			
 			// covering columns at the right
@@ -41,6 +43,7 @@ public class DLX {
 			solve(k+1);
 			
 			rows.remove(downit);
+			c = ((DancingObject)downit).getColumn();
 			
 			// uncovering columns from the left
 			for (DancingItem leftnode = downit.left(); leftnode != downit; 

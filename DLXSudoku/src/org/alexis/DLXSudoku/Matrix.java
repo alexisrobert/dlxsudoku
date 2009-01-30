@@ -79,17 +79,14 @@ public class Matrix {
 	
 	/** Find the column which has minimal 1's */
 	public static DancingColumn getColumnHeuristic(DancingHeader hdr) {
-		DancingItem it = hdr.right();
+		int min = ((DancingColumn)hdr.right()).getSize();
+		DancingColumn minobj = (DancingColumn)hdr.right();
 		
-		int min = ((DancingColumn)it).getSize();
-		DancingColumn minobj = (DancingColumn)it;
-		
-		while (it != hdr) {
-			if (it instanceof DancingColumn && ((DancingColumn)it).getSize() < min) {
-				minobj = (DancingColumn)it;
+		for (DancingItem item = hdr.left(); item != hdr; item = item.left()) {
+			if (item instanceof DancingColumn && ((DancingColumn)item).getSize() <= min) {
+				minobj = (DancingColumn)item;
 				min = minobj.getSize();
 			}
-			it = it.right();
 		}
 		
 		return minobj;

@@ -45,40 +45,21 @@ public class DancingColumn extends DancingItem {
 		
 		System.out.println("Covering "+this.toString());
 		
-		DancingItem it = this.down();
-		DancingItem it2 = null;
-		while (it != this) {
-			try {
-				it2 = it.right();
-				while (it2 != it) {
-					System.out.println("Covering object "+it2);
-					((DancingObject) it2).cover();
-					System.out.println(((DancingObject)it2).getData());
-					it2 = it2.right();
-				}
-			} finally {
-				it = it.down();
+		for (DancingItem row = this.down(); row != this; row = row.down()) {
+			for (DancingItem right = row.right(); right != row; right = right.right()) {
+				System.out.println("Covering object "+right);
+				((DancingObject) right).cover();
 			}
 		}
 	}
 	
 	public void rollback() {
 		System.out.println("Uncovering "+this.toString());
-		DancingItem it = this.up();
-		DancingItem it2 = null;
 		
-		while (it != this) {
-			try {
-				if (it.left() == null) continue;
-				
-				it2 = it.left();
-				while (it2 != it) {
-					System.out.println("Uncovering object "+it2.toString());
-					((DancingObject) it2).rollback();
-					it2 = it2.left();
-				}
-			} finally {
-				it = it.up();
+		for (DancingItem row = this.up(); row != this; row = row.up()) {
+			for (DancingItem left = row.left(); left != row; left = left.left()) {
+				System.out.println("Uncovering object "+left);
+				((DancingObject) left).rollback();
 			}
 		}
 		

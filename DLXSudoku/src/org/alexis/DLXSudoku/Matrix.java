@@ -11,8 +11,6 @@ public class Matrix {
 			for (int x = 0; x < matrix[y].length; x++) {
 				if (matrix[y][x] == null) continue;
 				
-				System.out.println(x+","+y);
-				
 				/* 1. LEFT/NEXT LINKING */
 				
 				// Find the <- left existing previous node
@@ -21,7 +19,7 @@ public class Matrix {
 				
 				while (matrix[y][k] == null && k > 0) { k--; }
 				
-				// if we've no <- left nodes to link, test -> right
+				// if we've no <- left nodes to link, test from the other side
 				if (matrix[y][k] == null) {
 					k = matrix[y].length-1;
 					

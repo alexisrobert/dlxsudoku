@@ -27,31 +27,28 @@ public class DLX {
 		System.out.println(String.format("=== Selecting %s (k=%d) ===",c,k));
 		c.cover();
 		
-		DancingItem downit = c.down();
-		DancingItem lrit = null;
-		
-		while (downit != c) {
+		for(DancingItem downit = c.down(); downit != c; downit = downit.down()) {
 			rows.add(downit);
 			
 			// covering columns at the right
-			lrit = downit.right();
-			while (lrit != downit) {
-				if (lrit instanceof DancingObject)
-					((DancingObject)lrit).getColumn().cover();
-				lrit = lrit.right();
+			for (DancingItem rightnode = downit.right(); rightnode != downit; 
+					rightnode = rightnode.right()) {
+				
+				if (rightnode instanceof DancingObject)
+					((DancingObject)rightnode).getColumn().cover();
 			}
 			
 			solve(k+1);
 			
-			// uncovering columns from the left
-			lrit = downit.left();
-			while (lrit != downit) {
-				if (lrit instanceof DancingObject)
-					((DancingObject)lrit).getColumn().rollback();
-				lrit = lrit.left();
-			}
+			rows.remove(downit);
 			
-			downit = downit.down();
+			// uncovering columns from the left
+			for (DancingItem leftnode = downit.left(); leftnode != downit; 
+					leftnode = leftnode.left()) {
+				
+				if (leftnode instanceof DancingObject)
+					((DancingObject)leftnode).getColumn().rollback();
+			}
 		}
 		
 		c.rollback();

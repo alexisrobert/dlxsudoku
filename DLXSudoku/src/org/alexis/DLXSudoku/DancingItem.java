@@ -5,6 +5,7 @@ public abstract class DancingItem {
 	protected DancingItem right;
 	protected DancingItem up;
 	protected DancingItem down;
+	protected boolean covered = false;
 	
 	public DancingItem() {}
 	
@@ -53,5 +54,9 @@ public abstract class DancingItem {
 	
 	public void setDown(DancingItem item) {
 		this.down = item;
+	}
+	
+	public boolean isCovered() {
+		return this.covered;
 	}
 }

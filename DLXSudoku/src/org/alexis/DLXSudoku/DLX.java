@@ -43,7 +43,6 @@ public class DLX {
 			solve(k+1);
 			
 			rows.remove(downit);
-			c = ((DancingObject)downit).getColumn();
 			
 			// uncovering columns from the left
 			for (DancingItem leftnode = downit.left(); leftnode != downit; 

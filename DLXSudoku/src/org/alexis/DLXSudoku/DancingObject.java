@@ -15,17 +15,19 @@ public class DancingObject extends DancingItem {
 	
 	/* Dancing Links part - MAGIC KITTIES INSIDE */
 	public void rollback() {
+		/*this.covered = false;
 		this.up.down = this;
 		this.down.up = this;
 		
-		this.column.setSize(this.column.getSize()+1);
+		this.column.setSize(this.column.getSize()+1);*/
 	}
 	
 	public void cover() {
+		/*this.covered = true;
 		this.down.up = this.up;
 		this.up.down = this.down;
 		
-		this.column.setSize(this.column.getSize()-1);
+		this.column.setSize(this.column.getSize()-1);*/
 	}
 	/* end of magic land */
 	

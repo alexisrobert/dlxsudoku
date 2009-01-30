@@ -21,6 +21,16 @@ public class Solver {
 			{null,null,null,new DancingObject(1),new DancingObject(1),null,new DancingObject(4)}
 		};
 		
+		/*DancingItem[][] init = new DancingItem[][] {
+				{new DancingColumn("A"),new DancingColumn("B"),new DancingColumn("C"),new DancingColumn("D"),new DancingColumn("E"),new DancingColumn("F"),new DancingColumn("G")},
+				{new DancingObject(1),null,null,new DancingObject(1),null,null,new DancingObject(1)},
+				{new DancingObject(1),null,null,new DancingObject(1),null,null,null},
+				{null,null,null,new DancingObject(1),new DancingObject(1),null,new DancingObject(1)},
+				{null,null,new DancingObject(1),null,new DancingObject(1),new DancingObject(1),null},
+				{null,new DancingObject(1),new DancingObject(1),null,null,new DancingObject(1),new DancingObject(1)},
+				{null,new DancingObject(1),null,null,null,null,new DancingObject(1)}
+		};*/
+		
 		Matrix.computeLinks(init);
 		Matrix.linkNodesToColumn(init);
 		Matrix.linkHeader(init, hdr);
@@ -35,6 +45,9 @@ public class Solver {
 		System.gc();
 		
 		System.out.println("Step 3. Solving matrix ...");
+		
+		Matrix.items = init;
+		Matrix.printMatrix(init);
 		
 		DLX dlx = new DLX(hdr);
 		dlx.solve(0);

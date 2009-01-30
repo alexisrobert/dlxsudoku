@@ -1,6 +1,7 @@
 package org.alexis.DLXSudoku;
 
 public class Matrix {
+	public static DancingItem[][] items = null;
 	/**
 	 * This function computes all links between nodes to convert DancingItem[][]
 	 * to a double-linked circular list which can be used by DLX.
@@ -35,10 +36,10 @@ public class Matrix {
 				/* 2. SAME THING WITH UP/DOWN */
 				
 				k = y-1;
-				if (k < 0) k = matrix.length-1;
+				if (y == 0) k = matrix.length-1;
 				
-				while (matrix[k][x] == null && k > 0) { k--; }
-					
+				while (k > 0 && matrix[k][x] == null) { k--; }
+				
 				if (matrix[k][x] == null) {
 					k = matrix.length-1;
 					while (matrix[k][x] == null) { k--; }
@@ -101,5 +102,24 @@ public class Matrix {
 		
 		first.left().setRight(hdr);
 		first.setLeft(hdr);
+	}
+	
+	/** Prints Matrix */
+	public static void printMatrix(DancingItem[][] init) {
+		for (int x = 0; x < init[0].length; x++) {
+			if (init[0][x].isCovered()) continue;
+			
+			System.out.print(((DancingColumn)init[0][x]).getName()+" ");
+			
+			for (int y = 0; y < init.length; y++) {
+				if (init[y][x] instanceof DancingObject &&
+						init[y][x].up().down() == init[y][x]) {
+					System.out.print(((DancingObject)init[y][x]).getData()+" ");
+				} else {
+					System.out.print("0 ");
+				}
+			}
+			System.out.println();
+		}
 	}
 }

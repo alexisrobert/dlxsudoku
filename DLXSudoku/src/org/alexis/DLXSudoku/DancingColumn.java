@@ -17,10 +17,6 @@ public class DancingColumn extends DancingItem {
 		return this.name;
 	}
 	
-	public void setSize(int size) {
-		this.size = size;
-	}
-	
 	public int getSize() {
 		return this.size;
 	}
@@ -40,24 +36,31 @@ public class DancingColumn extends DancingItem {
 	
 	public void cover() {
 		// Covering column element
+		System.out.println("Covering "+this);
+		this.covered = true;
+		
 		this.right.left = this.left;
 		this.left.right = this.right;
 		
-		System.out.println("Covering "+this.toString());
-		
 		for (DancingItem row = this.down(); row != this; row = row.down()) {
-			for (DancingItem right = row.right(); right != row; right = right.right()) {
-				((DancingObject) right).cover();
+			for (DancingItem rightnode = row.right(); rightnode != row; rightnode = rightnode.right()) {
+				rightnode.down.up = rightnode.up;
+				rightnode.up.down = rightnode.down;
+				((DancingObject)rightnode).getColumn().size--;
 			}
 		}
 	}
 	
 	public void rollback() {
+		this.covered = false;
 		System.out.println("Uncovering "+this.toString());
 		
 		for (DancingItem row = this.up(); row != this; row = row.up()) {
-			for (DancingItem left = row.left(); left != row; left = left.left()) {
-				((DancingObject) left).rollback();
+			System.out.println("KIKOO LOL");
+			for (DancingItem leftnode = row.left(); leftnode != row; leftnode = leftnode.left()) {
+				leftnode.up.down = leftnode;
+				leftnode.down.up = leftnode;
+				((DancingObject)leftnode).getColumn().size++;
 			}
 		}
 		

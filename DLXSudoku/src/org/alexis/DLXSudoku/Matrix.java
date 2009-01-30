@@ -7,66 +7,48 @@ public class Matrix {
 	 */
 	public static void computeLinks(DancingItem[][] matrix) {
 		// For each cell ...
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[i].length; j++) {
+		for (int y = 0; y < matrix.length; y++) {
+			for (int x = 0; x < matrix[y].length; x++) {
+				if (matrix[y][x] == null) continue;
 				
-				// If you're in the first column, you don't need direct next/prev linking
-				// and if you're null, too.
-				if (j > 0 && matrix[i][j] != null) {
+				System.out.println(x+","+y);
+				
+				/* 1. LEFT/NEXT LINKING */
+				
+				// Find the <- left existing previous node
+				int k = x-1;
+				if (x == 0) k = matrix[y].length-1; // i've we're on the first row, link with the other side
+				
+				while (matrix[y][k] == null && k > 0) { k--; }
+				
+				// if we've no <- left nodes to link, test -> right
+				if (matrix[y][k] == null) {
+					k = matrix[y].length-1;
 					
-					// Find the next existing previous node
-					int k = j-1;
-					while (matrix[i][k] == null && k > 0) { k--; }
-					
-					// if we've no other nodes to link, link with himself
-					if (matrix[i][k] == null) {
-						k = j;
-					}
-					
-					// and link with it.
-					System.out.println(String.format("Linking %dx%d <-> %dx%d (next/prev) ...", i,k,i,j));
-					matrix[i][k].setRight(matrix[i][j]);
-					matrix[i][j].setLeft(matrix[i][k]);
+					// no k escape because it will link with itselfs
+					while (matrix[y][k] == null) { k--; }
 				}
 				
-				// Else, find the last node for circular linking if you're on the first column
-				if (j == 0 && matrix[i][j] != null) {
-					int k = matrix[i].length-1;
-					while(matrix[i][k] == null && k > 0) { k--; }
-
-					if (matrix[i][k] != null) {
-						System.out.println(String.format("Circular linking %dx%d <-> %dx%d (next/prev) ...", i,j,i,k));
-						matrix[i][j].setLeft(matrix[i][k]);
-						matrix[i][k].setRight(matrix[i][j]);
-					}
-				}
+				// and link with it.
+				System.out.println(String.format("Linking %dx%d <-> %dx%d (left/right) ...", k,y,x,y));
+				matrix[y][k].setRight(matrix[y][x]);
+				matrix[y][x].setLeft(matrix[y][k]);
 				
-				// Do the same thing on up/down-coordinate
-				if (i > 0 && matrix[i][j] != null) {
-					int k = i-1;
-
-					while (matrix[k][j] == null && k > 0) { k--; }
+				/* 2. SAME THING WITH UP/DOWN */
+				
+				k = y-1;
+				if (k < 0) k = matrix.length-1;
+				
+				while (matrix[k][x] == null && k > 0) { k--; }
 					
-					if (matrix[k][j] == null) {
-						k = j;
-					}
-
-					System.out.println(String.format("Linking %dx%d <-> %dx%d (up/down) ...", k,j,i,j));
-					matrix[k][j].setDown(matrix[i][j]);
-					matrix[i][j].setUp(matrix[k][j]);
+				if (matrix[k][x] == null) {
+					k = matrix.length-1;
+					while (matrix[k][x] == null) { k--; }
 				}
 				
-				// Do the same circular linking on rows
-				if (i == 0 && matrix[i][j] != null) {
-					int k = matrix.length-1;
-					while(matrix[k][j] == null && k > 0) { k--; }
-
-					if (matrix[k][j] != null) {
-						System.out.println(String.format("Circular linking %dx%d <-> %dx%d (up/down) ...", i,j,k,j));
-						matrix[i][j].setUp(matrix[k][j]);
-						matrix[k][j].setDown(matrix[i][j]);
-					}
-				}
+				System.out.println(String.format("Linking %dx%d <-> %dx%d (up/down) ...", x,k,x,y));
+				matrix[k][x].setDown(matrix[y][x]);
+				matrix[y][x].setUp(matrix[k][x]);
 			}
 		}
 	}

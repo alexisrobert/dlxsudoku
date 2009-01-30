@@ -44,8 +44,4 @@ public class DancingObject extends DancingItem {
 	public DancingColumn getColumn() {
 		return this.column;
 	}
-	
-	public String toString() {
-		return this.data.toString();
-	}
 }

@@ -51,8 +51,9 @@ public class DancingColumn extends DancingItem {
 			try {
 				it2 = it.right();
 				while (it2 != it) {
-					System.out.println("Covering object "+it2.toString());
+					System.out.println("Covering object "+it2);
 					((DancingObject) it2).cover();
+					System.out.println(((DancingObject)it2).getData());
 					it2 = it2.right();
 				}
 			} finally {

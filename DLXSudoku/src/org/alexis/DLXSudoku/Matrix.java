@@ -105,20 +105,29 @@ public class Matrix {
 	}
 	
 	/** Prints Matrix */
-	public static void printMatrix(DancingItem[][] init) {
-		for (int x = 0; x < init[0].length; x++) {
-			if (init[0][x].isCovered()) continue;
+	public static void printMatrix(DancingItem[][] matrix) {
+		for (int x = 0; x < matrix[0].length; x++) {
+			if (matrix[0][x].isCovered()) continue;
 			
-			System.out.print(((DancingColumn)init[0][x]).getName()+" ");
+			System.out.print(((DancingColumn)matrix[0][x]).getName()+" ");
 			
-			for (int y = 0; y < init.length; y++) {
-				if (init[y][x] instanceof DancingObject &&
-						init[y][x].up().down() == init[y][x]) {
-					System.out.print(((DancingObject)init[y][x]).getData()+" ");
-				} else {
-					System.out.print("0 ");
+			for (int y = 1; y < matrix.length; y++) {
+				int k = x;
+				
+				while (matrix[y][k] == null && k > 0) { k--; }
+				if (matrix[y][k] == null) {
+					k = x;
+					while (matrix[y][k] == null && k < matrix[y].length) { k++; }
 				}
+				
+				if (matrix[y][k] == null || matrix[y][k].isCovered()
+						|| ((DancingObject)matrix[y][k]).getColumn().isCovered())
+					continue;
+				
+				if (matrix[y][x] == null) System.out.print("0 ");
+				else System.out.print(((DancingObject)matrix[y][x]).getData()+" ");
 			}
+			
 			System.out.println();
 		}
 	}

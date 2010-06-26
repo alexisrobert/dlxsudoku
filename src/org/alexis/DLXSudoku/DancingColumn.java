@@ -21,6 +21,10 @@ public class DancingColumn extends DancingItem {
 		return this.size;
 	}
 	
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
 	public void computeSize() {
 		this.size = 0;
 		DancingItem it = this.down();
@@ -38,6 +42,8 @@ public class DancingColumn extends DancingItem {
 		// Covering column element
 		System.out.println("Covering "+this);
 		this.covered = true;
+		this.right.left = this.left;
+		this.left.right = this.right;
 		
 		for (DancingItem row = this.down(); row != this; row = row.down()) {
 			for (DancingItem rightnode = row.right(); rightnode != row; rightnode = rightnode.right()) {
@@ -45,11 +51,6 @@ public class DancingColumn extends DancingItem {
 				((DancingObject)rightnode).getColumn().size--;
 			}
 		}
-		
-		this.right.left = this.left;
-		this.left.right = this.right;
-		
-		Matrix.printMatrix(Matrix.items);
 	}
 	
 	public void rollback() {

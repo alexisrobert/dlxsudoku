@@ -3,6 +3,7 @@ package org.alexis.DLXSudoku;
 public class DancingObject extends DancingItem {
 	private Object data;
 	private DancingColumn column;
+	private String row;
 	
 	public DancingObject() {
 		super();
@@ -22,8 +23,8 @@ public class DancingObject extends DancingItem {
 	
 	public void cover() {
 		this.covered = true;
-		this.down.up = this.up;
 		this.up.down = this.down;
+		this.down.up = this.up;
 	}
 	/* end of magic land */
 	
@@ -33,6 +34,14 @@ public class DancingObject extends DancingItem {
 	
 	public Object getData() {
 		return this.data;
+	}
+	
+	public String getRow() {
+		return this.row;
+	}
+	
+	public void setRow(String row) {
+		this.row = row;
 	}
 	
 	public void setColumn(DancingColumn c) {

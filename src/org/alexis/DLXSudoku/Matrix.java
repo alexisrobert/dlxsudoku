@@ -80,17 +80,21 @@ public class Matrix {
 	
 	/** Find the column which has minimal 1's */
 	public static DancingColumn getColumnHeuristic(DancingHeader hdr) {
-		int min = ((DancingColumn)hdr.right()).getSize();
-		DancingColumn minobj = (DancingColumn)hdr.right();
+		int min = -1;
+		DancingColumn col = null;
+		int cursize = 0;
 		
-		for (DancingItem item = hdr.left(); item != hdr; item = item.left()) {
-			if (item instanceof DancingColumn && ((DancingColumn)item).getSize() <= min) {
-				minobj = (DancingColumn)item;
-				min = minobj.getSize();
+		DancingItem item = hdr.left();
+		do {
+			cursize = ((DancingColumn)item).getSize();
+			if (cursize <= min || min == -1) {
+				min = cursize;
+				col = (DancingColumn)item;
 			}
-		}
+			item = item.left();
+		} while (item != hdr);
 		
-		return minobj;
+		return col;
 	}
 	
 	/** Links with DancingHeader */
@@ -106,7 +110,7 @@ public class Matrix {
 	
 	/** Prints Matrix */
 	public static void printMatrix(DancingItem[][] matrix) {
-		for (int x = 0; x < matrix[0].length; x++) {
+		/*for (int x = 0; x < matrix[0].length; x++) {
 			if (matrix[0][x].isCovered()) continue;
 			
 			System.out.print(((DancingColumn)matrix[0][x]).getName()+" ");
@@ -129,6 +133,6 @@ public class Matrix {
 			}
 			
 			System.out.println();
-		}
+		}*/
 	}
 }

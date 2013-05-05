@@ -1,0 +1,12 @@
+Each year freshmen in my school present a science experiment to show potential future freshmen that science is cool.
+
+As everybody did Physics-only projects, I decided with a friend to do a "math experiment" and we didn't have any idea other than presenting an algorithm : each one of us will do it's implementation, (this one and a home-made one) and we'll measure them to tell people that "using Maths can speed up things and solve complex day to day problems".
+This is an implementation of a Sudoku solver in Java, using Knuth's DLX algorithm. This algorithm solves the NP-complete exact cover set problem in a reasonable time.
+
+The software converts your sudoku table into an exact cover set problem matrix before solving it.
+
+Take note that the hardest sudoku available is solved in almost 10 seconds on a 1.83GHz Core Duo processor.
+
+Please take care that I didn't have a lot of time to program this, so the code is CRAPPY. But the exact cover set problem can modelize other constrained situations so this implementation may be a good start for other people.
+
+NB : Note that I used Mathematica to pilot directly the classes using their Java bridge, so there isn't much of an user interface.
